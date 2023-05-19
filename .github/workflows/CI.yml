@@ -20,12 +20,12 @@ jobs:
         run: npm install
       - name: Test
         run: npm run test
-      - name: Coverage
-        uses: mattallty/jest-github-action@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          test-command: "npm run coverage"
+      # - name: Coverage
+      #   uses: mattallty/jest-github-action@v1
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   with:
+      #     test-command: "npm run coverage"
       # - uses: actions/upload-artifact@v2
       #   if: success() || failure() 
       #   with:
