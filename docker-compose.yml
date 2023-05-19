@@ -1,0 +1,30 @@
+version: '3'
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    ports:
+      - 27017:27017
+    volumes:
+      - mongodb-data:/data/db
+    restart: unless-stopped
+  hightracks-api:
+    image: gcr.io/cnsa2023-dbu104/hightracks-api:latest
+    container_name: hightracks-api
+    environment:
+      - MONGODB_URI=${MONGODB_URI}
+      - CLIENT_ID=${CLIENT_ID}
+      - CLIENT_SECRET=${CLIENT_SECRET}
+    ports:
+      - 3000:3000
+    depends_on:
+      - mongodb
+    restart: unless-stopped
+  hightracks-app:
+    image: gcr.io/cnsa2023-dbu104/hightracks-app:latest
+    container_name: hightracks-app
+    ports:
+      - 80:80
+    restart: unless-stopped
+volumes:
+  mongodb-data:
