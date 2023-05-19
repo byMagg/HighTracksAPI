@@ -57,7 +57,7 @@ jobs:
           project_id: ${{ vars.GCLOUD_PROJECT_ID }}
           image_name: hightracks-api
           image_tag: latest, ${{ github.sha }}
-          dockerfile: .Dockerfile
+          dockerfile: Dockerfile
           context: ./
   deploy:
     needs: [build-and-push-to-gcr-back]
