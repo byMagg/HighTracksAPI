@@ -20,11 +20,5 @@ services:
     depends_on:
       - mongodb
     restart: unless-stopped
-  hightracks-app:
-    image: gcr.io/cnsa2023-dbu104/hightracks-app:latest
-    container_name: hightracks-app
-    ports:
-      - 80:80
-    restart: unless-stopped
 volumes:
   mongodb-data:
