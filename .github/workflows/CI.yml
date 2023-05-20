@@ -30,7 +30,8 @@ jobs:
         if: success() || failure() 
         with:
           name: test-results 
-          path: ./coverage/test.results.xml
+          path: | 
+            ./coverage/
       # - name: Save Code Linting Report JSON
       #   run: npm run lint:json
       #   continue-on-error: true 
