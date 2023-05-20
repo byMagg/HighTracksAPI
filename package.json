@@ -6,9 +6,14 @@
   "scripts": {
     "start": "node src/main",
     "test": "jest --forceExit",
-    "coverage": "jest --forceExit --coverage --coverageReporters=text --coverageReporters=html --coverageDirectory=./coverage/",
+    "coverage": "jest --forceExit --reporters=default --reporters=jest-junit --coverage --coverageReporters=text --coverageReporters=html --coverageDirectory=./coverage/",
     "lint": "eslint src/**/*.js -f checkstyle -o coverage/eslint-result.xml",
     "lint:json": "eslint src/**/*.js --format json -o coverage/eslint-result.json"
+  },
+  "jest-junit": {
+    "outputDirectory": "./coverage/",
+    "outputName": "test.results.xml",
+    "usePathForSuiteName": "true"
   },
   "jest": {
     "moduleNameMapper": {

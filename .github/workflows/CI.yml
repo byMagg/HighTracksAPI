@@ -26,11 +26,11 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           test-command: "npm run coverage"
-      # - uses: actions/upload-artifact@v2
-      #   if: success() || failure() 
-      #   with:
-      #     name: test-results 
-      #     path: ./coverage/test.results.xml
+      - uses: actions/upload-artifact@v2
+        if: success() || failure() 
+        with:
+          name: test-results 
+          path: ./coverage/test.results.xml
       # - name: Save Code Linting Report JSON
       #   run: npm run lint:json
       #   continue-on-error: true 
