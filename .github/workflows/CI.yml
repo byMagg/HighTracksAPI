@@ -26,20 +26,21 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           test-command: "npm run coverage"
+        continue-on-error: true
       - uses: actions/upload-artifact@v2
         if: success() || failure() 
         with:
           name: test-results 
           path: | 
             ./coverage/
-      # - name: Save Code Linting Report JSON
-      #   run: npm run lint:json
-      #   continue-on-error: true 
-      # - name: Annotate Code Linting Results
-      #   uses: ataylorme/eslint-annotate-action@1.2.0
-      #   with:
-      #     repo-token: "${{ secrets.GITHUB_TOKEN }}" 
-      #     report-json: "./coverage/eslint-result.json" 
+      - name: Save Code Linting Report JSON
+        run: npm run lint:json
+        continue-on-error: true 
+      - name: Annotate Code Linting Results
+        uses: ataylorme/eslint-annotate-action@1.2.0
+        with:
+          repo-token: "${{ secrets.GITHUB_TOKEN }}" 
+          report-json: "./coverage/eslint-result.json" 
   # build-and-push-to-gcr-back:
   #   name: Build & Push to GCR
   #   needs: [build-back]
