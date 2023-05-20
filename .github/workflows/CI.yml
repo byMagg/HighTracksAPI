@@ -75,7 +75,7 @@ jobs:
             ssh ubuntu@${{ vars.SSH_HOST }} "if [ ! -d 'HighTracksAPI' ]; then \
                 git clone https://github.com/byMagg/HighTracksAPI.git; \
               else \
-                cd HighTracksAPI && git stash && git fetch --all && git reset --hard origin/master && git pull origin master; \
+                cd HighTracksAPI && git stash && git fetch --all && git reset --hard origin/main && git pull origin main; \
               fi"
             ssh ubuntu@${{ vars.SSH_HOST }} "cd HighTracksAPI && echo -e 'MONGODB_URI=${{ vars.MONGODB_URI }}\nCLIENT_ID=${{ secrets.CLIENT_ID }}\nCLIENT_SECRET=${{ secrets.CLIENT_SECRET }}' > .env"
             ssh ubuntu@${{ vars.SSH_HOST }} "cd HighTracksAPI && docker-compose pull && docker-compose up -d --remove-orphans && yes | docker image prune"
