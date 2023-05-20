@@ -20,12 +20,12 @@ jobs:
         run: npm install
       - name: Test
         run: npm run test
-      # - name: Coverage
-      #   uses: mattallty/jest-github-action@v1
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #   with:
-      #     test-command: "npm run coverage"
+      - name: Coverage
+        uses: mattallty/jest-github-action@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          test-command: "npm run coverage"
       # - uses: actions/upload-artifact@v2
       #   if: success() || failure() 
       #   with:
@@ -39,43 +39,43 @@ jobs:
       #   with:
       #     repo-token: "${{ secrets.GITHUB_TOKEN }}" 
       #     report-json: "./coverage/eslint-result.json" 
-  build-and-push-to-gcr-back:
-    name: Build & Push to GCR
-    needs: [build-back]
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Authenticate to Google Cloud
-        id: auth
-        uses: google-github-actions/auth@v0
-        with:
-          credentials_json: '${{ secrets.B64_GCLOUD_SERVICE_ACCOUNT_JSON }}'
-      - name: Building and pushing the image
-        uses: RafikFarhad/push-to-gcr-github-action@v5-beta
-        with:
-          registry: gcr.io
-          project_id: ${{ vars.GCLOUD_PROJECT_ID }}
-          image_name: hightracks-api
-          image_tag: latest, ${{ github.sha }}
-          dockerfile: Dockerfile
-          context: ./
-  deploy:
-    needs: [build-and-push-to-gcr-back]
-    runs-on: ubuntu-latest
-    steps:
-      - name: Install SSH Key
-        uses: shimataro/ssh-key-action@v2
-        with:
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          known_hosts: 'un-valor-para-que-no-de-error'
-      - name: Adding Known Hosts
-        run: ssh-keyscan -H ${{ vars.SSH_HOST }} >> ~/.ssh/known_hosts
-      - name: Deploy
-        run: |
-            ssh ubuntu@${{ vars.SSH_HOST }} "if [ ! -d 'HighTracksAPI' ]; then \
-                git clone https://github.com/byMagg/HighTracksAPI.git; \
-              else \
-                cd HighTracksAPI && git stash && git fetch --all && git reset --hard origin/main && git pull origin main; \
-              fi"
-            ssh ubuntu@${{ vars.SSH_HOST }} "cd HighTracksAPI && echo -e 'MONGODB_URI=${{ vars.MONGODB_URI }}\nCLIENT_ID=${{ secrets.CLIENT_ID }}\nCLIENT_SECRET=${{ secrets.CLIENT_SECRET }}' > .env"
-            ssh ubuntu@${{ vars.SSH_HOST }} "cd HighTracksAPI && docker-compose pull && docker-compose up -d --remove-orphans && yes | docker image prune"
+  # build-and-push-to-gcr-back:
+  #   name: Build & Push to GCR
+  #   needs: [build-back]
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #     - name: Authenticate to Google Cloud
+  #       id: auth
+  #       uses: google-github-actions/auth@v0
+  #       with:
+  #         credentials_json: '${{ secrets.B64_GCLOUD_SERVICE_ACCOUNT_JSON }}'
+  #     - name: Building and pushing the image
+  #       uses: RafikFarhad/push-to-gcr-github-action@v5-beta
+  #       with:
+  #         registry: gcr.io
+  #         project_id: ${{ vars.GCLOUD_PROJECT_ID }}
+  #         image_name: hightracks-api
+  #         image_tag: latest, ${{ github.sha }}
+  #         dockerfile: Dockerfile
+  #         context: ./
+  # deploy:
+  #   needs: [build-and-push-to-gcr-back]
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Install SSH Key
+  #       uses: shimataro/ssh-key-action@v2
+  #       with:
+  #         key: ${{ secrets.SSH_PRIVATE_KEY }}
+  #         known_hosts: 'un-valor-para-que-no-de-error'
+  #     - name: Adding Known Hosts
+  #       run: ssh-keyscan -H ${{ vars.SSH_HOST }} >> ~/.ssh/known_hosts
+  #     - name: Deploy
+  #       run: |
+  #           ssh ubuntu@${{ vars.SSH_HOST }} "if [ ! -d 'HighTracksAPI' ]; then \
+  #               git clone https://github.com/byMagg/HighTracksAPI.git; \
+  #             else \
+  #               cd HighTracksAPI && git stash && git fetch --all && git reset --hard origin/main && git pull origin main; \
+  #             fi"
+  #           ssh ubuntu@${{ vars.SSH_HOST }} "cd HighTracksAPI && echo -e 'MONGODB_URI=${{ vars.MONGODB_URI }}\nCLIENT_ID=${{ secrets.CLIENT_ID }}\nCLIENT_SECRET=${{ secrets.CLIENT_SECRET }}' > .env"
+  #           ssh ubuntu@${{ vars.SSH_HOST }} "cd HighTracksAPI && docker-compose pull && docker-compose up -d --remove-orphans && yes | docker image prune"
