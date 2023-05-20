@@ -5,7 +5,7 @@
   "main": "src/main.js",
   "scripts": {
     "start": "node src/main",
-    "test": "jest --forceExit",
+    "test": "jest --forceExit --reporters=default --reporters=jest-junit",
     "coverage": "jest --forceExit --reporters=default --reporters=jest-junit --coverage --coverageReporters=text --coverageReporters=html --coverageDirectory=./coverage/",
     "lint": "eslint src/**/*.js -f checkstyle -o coverage/eslint-result.xml",
     "lint:json": "eslint src/**/*.js --format json -o coverage/eslint-result.json"
