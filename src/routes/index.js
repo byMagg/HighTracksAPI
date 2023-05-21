@@ -335,8 +335,11 @@ router.get('/search/:search', ctrlTracks.tracksSearchSpotify);
  *       500:
  *         $ref: '#/components/responses/InternalServer'
  */
-router.get('/tracks/search', ctrlAuth.verifyToken, ctrlTracks.trackSearchByField);
-
+router.get(
+  '/tracks/search',
+  ctrlAuth.verifyToken,
+  ctrlTracks.trackSearchByField
+);
 
 /**
  * @swagger
@@ -535,7 +538,11 @@ router.delete('/tracks/:id', ctrlAuth.verifyToken, ctrlTracks.trackDelete);
  *       '500':
  *         $ref: '#/components/responses/InternalServer'
  */
-router.post('/tracks/:id/comments', ctrlAuth.verifyToken, ctrlTracks.trackInsertComment);
+router.post(
+  '/tracks/:id/comments',
+  ctrlAuth.verifyToken,
+  ctrlTracks.trackInsertComment
+);
 
 /**
  * @swagger
@@ -568,7 +575,11 @@ router.post('/tracks/:id/comments', ctrlAuth.verifyToken, ctrlTracks.trackInsert
  *       500:
  *         $ref: '#/components/responses/ServerError'
  */
-router.get('/tracks/:id/comments', ctrlAuth.verifyToken, ctrlTracks.commentGetAll);
+router.get(
+  '/tracks/:id/comments',
+  ctrlAuth.verifyToken,
+  ctrlTracks.commentGetAll
+);
 
 /**
  * @swagger
@@ -601,6 +612,10 @@ router.get('/tracks/:id/comments', ctrlAuth.verifyToken, ctrlTracks.commentGetAl
  *       500:
  *         $ref: '#/components/responses/InternalServer'
  */
-router.delete('/tracks/:id/comments/:commentId', ctrlAuth.verifyToken, ctrlTracks.commentDeleteOne);
+router.delete(
+  '/tracks/:id/comments/:commentId',
+  ctrlAuth.verifyToken,
+  ctrlTracks.commentDeleteOne
+);
 
 module.exports = router;

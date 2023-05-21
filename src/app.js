@@ -47,7 +47,7 @@ const swaggerDefinition = {
 
 const options = {
   swaggerDefinition,
-  apis: ['./src/routes/*.js',],
+  apis: ['./src/routes/*.js'],
 };
 
 const swaggerSpec = swaggerJSDoc(options);
@@ -56,11 +56,11 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.use((req, res) => {
   res.status(404).send({
-    "error": {
-      "code": "404",
-      "message": "El recurso solicitado no se encontró en el servidor."
-    }
-  })
+    error: {
+      code: '404',
+      message: 'El recurso solicitado no se encontró en el servidor.',
+    },
+  });
 });
 
 module.exports = app;
