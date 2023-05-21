@@ -36,7 +36,7 @@ jobs:
       #     path: | 
       #       ./coverage/
       - name: Save Code Linting Report JSON
-        run: npm run lint:json
+        run: npm run lint:json -- --fix
         continue-on-error: true 
       
       - name: Annotate Code Linting Results
