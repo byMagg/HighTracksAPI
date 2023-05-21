@@ -22,7 +22,7 @@ jobs:
       - name: Test
         run: npm run test
       # - name: Coverage
-      #   uses: mattallty/jest-github-action@v1
+      #   uses: mattallty/jest-github-action@v1.0.3
       #   env:
       #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       #   with:
@@ -40,7 +40,7 @@ jobs:
         # continue-on-error: true 
       
       - name: Annotate Code Linting Results
-        uses: ataylorme/eslint-annotate-action@1.2.0
+        uses: ataylorme/eslint-annotate-action@v2
         with:
           repo-token: "${{ secrets.GITHUB_TOKEN }}" 
           report-json: "./coverage/eslint-result.json"
