@@ -21,28 +21,29 @@ jobs:
         run: npm install
       - name: Test
         run: npm run test
-      - name: Coverage
-        uses: mattallty/jest-github-action@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          test-command: "npm run coverage"
-          coverage-comment: false
-        # continue-on-error: true
-      - uses: actions/upload-artifact@v2
-        if: success() || failure() 
-        with:
-          name: test-results 
-          path: | 
-            ./coverage/
+      # - name: Coverage
+      #   uses: mattallty/jest-github-action@v1
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   with:
+      #     test-command: "npm run coverage"
+      #     coverage-comment: false
+      #   # continue-on-error: true
+      # - uses: actions/upload-artifact@v2
+      #   if: success() || failure() 
+      #   with:
+      #     name: test-results 
+      #     path: | 
+      #       ./coverage/
       - name: Save Code Linting Report JSON
         run: npm run lint:json
         # continue-on-error: true 
+      
       - name: Annotate Code Linting Results
         uses: ataylorme/eslint-annotate-action@1.2.0
         with:
           repo-token: "${{ secrets.GITHUB_TOKEN }}" 
-          report-json: "./coverage/eslint-result.json" 
+          report-json: "./coverage/eslint-result.json"
   # build-and-push-to-gcr-back:
   #   name: Build & Push to GCR
   #   needs: [build-back]
