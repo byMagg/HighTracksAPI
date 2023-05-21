@@ -11,6 +11,7 @@ jobs:
   build-back:
     runs-on: ubuntu-latest
     container: node:16-alpine
+    name: Build & Test
     env:
       CLIENT_ID: ${{ secrets.CLIENT_ID }}
       CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
@@ -64,6 +65,7 @@ jobs:
   # deploy:
   #   needs: [build-and-push-to-gcr-back]
   #   runs-on: ubuntu-latest
+  #   name: Deploy to Server
   #   steps:
   #     - name: Install SSH Key
   #       uses: shimataro/ssh-key-action@v2
