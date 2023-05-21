@@ -16,7 +16,3 @@ describe("GET /", () => {
     });
 
 });
-
-afterAll(async () => {
-    await mongoose.disconnect();
-});
