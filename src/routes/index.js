@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const ctrlTracks = require('../controllers/tracks');
 const ctrlAuth = require('../controllers/auth');
+const ctrlTests = require('../controllers/tests');
 
 /**
  * @swagger
@@ -159,6 +160,7 @@ const ctrlAuth = require('../controllers/auth');
  */
 
 router.put('/recommendations', ctrlTracks.tracksRecommendations);
+router.put('/tests', ctrlTests.generateTests);
 
 // Token
 /**
