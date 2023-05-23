@@ -160,7 +160,6 @@ const ctrlAuth = require('../controllers/auth');
 
 router.put('/recommendations', ctrlTracks.tracksRecommendations);
 
-
 // Token
 /**
  * @swagger

@@ -31,7 +31,6 @@ const tracksRecommendations = async (req, res) => {
   }
 };
 
-
 /* GET api/search/:name */
 const tracksSearchSpotify = async (req, res) => {
   try {
