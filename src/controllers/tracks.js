@@ -8,7 +8,7 @@ const TrackRecommendationsService = require('../services/track-recommendations')
 const configuration = require('../config/config');
 const { OpenAIApi } = require('openai');
 
-/* POST api/recommendations */
+/* PUT api/recommendations */
 const tracksRecommendations = async (req, res) => {
   try {
     const recommendations = await new TrackRecommendationsService(
