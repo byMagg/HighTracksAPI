@@ -158,6 +158,9 @@ const ctrlAuth = require('../controllers/auth');
  *                 example: 404
  */
 
+router.put('/recommendations', ctrlTracks.tracksRecommendations);
+
+
 // Token
 /**
  * @swagger

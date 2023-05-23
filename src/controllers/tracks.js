@@ -4,6 +4,33 @@ const Track = mongoose.model('Track');
 const config = require('../common/config');
 const { sendJSONresponse } = require('../common/request');
 // const { ObjectId } = mongoose.Types;
+const TrackRecommendationsService = require('../services/track-recommendations');
+const configuration = require('../config/config');
+const { OpenAIApi } = require('openai');
+
+/* POST api/recommendations */
+const tracksRecommendations = async (req, res) => {
+  try {
+    const recommendations = await new TrackRecommendationsService(
+      new OpenAIApi(configuration.openai)
+    ).getTrackRecommendations(req.body);
+    console.log('Recommendations:', recommendations);
+    res.send(recommendations);
+  } catch (error) {
+    console.error(
+      `Error al obtener las recomendaciones de canciones: ${error.message}`
+    );
+    console.error(error);
+    sendJSONresponse(res, 400, {
+      error: {
+        code: '400',
+        message:
+          'La solicitud es incorrecta. Verifique que la información proporcionada sea válida y esté completa.',
+      },
+    });
+  }
+};
+
 
 /* GET api/search/:name */
 const tracksSearchSpotify = async (req, res) => {
@@ -239,6 +266,7 @@ const commentGetAll = async (req, res) => {
 };
 
 module.exports = {
+  tracksRecommendations,
   tracksSearchSpotify,
   trackSearchByField,
   trackInsertComment,
