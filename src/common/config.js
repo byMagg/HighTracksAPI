@@ -7,4 +7,5 @@ module.exports = {
   CLIENT_SECRET: process.env.CLIENT_SECRET || 'none',
   MONGODB_URI:
     process.env.MONGODB_URI || 'mongodb://localhost:27017/HighTracks',
+  OPENAI_KEY: process.env.OPENAI_KEY || 'none',
 };
