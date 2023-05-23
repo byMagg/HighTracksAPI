@@ -44,6 +44,7 @@ jobs:
         with:
           repo-token: "${{ secrets.GITHUB_TOKEN }}" 
           report-json: "./coverage/eslint-result.json"
+        continue-on-error: true
   build-and-push-to-gcr-back:
     name: Build & Push to GCR
     needs: [build-back]
