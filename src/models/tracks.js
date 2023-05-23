@@ -4,7 +4,7 @@ const { ObjectId } = mongoose.Schema.Types;
 const commentSchema = new mongoose.Schema({
   _id: { type: ObjectId, auto: true },
   author: { type: String, required: true },
-  text: { type: String, required: true },
+  text: { type: String, required: true, maxLength: 1000 },
   score: Number,
   location: {
     latitude: Number,
