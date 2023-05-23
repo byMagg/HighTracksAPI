@@ -111,6 +111,7 @@ const trackInsertMany = async (req, res) => {
     }
 
     tracks = tracks.map((track) => {
+      if (!track._id) track._id = mongoose.Types.ObjectId().toString();
       return {
         _id: track.id,
         ...track,
