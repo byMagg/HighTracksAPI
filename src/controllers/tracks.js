@@ -212,8 +212,8 @@ const trackInsertComment = async (req, res) => {
       );
     }
 
-    const { _id, author, text, score, location } = req.body;
-    const comment = { _id, author, text, score, location };
+    const { author, text, score, location } = req.body;
+    const comment = { author, text, score, location };
     track.comments.push(comment);
 
     await track.save();
