@@ -1,4 +1,3 @@
-const e = require('express');
 const configuration = require('../config/config');
 
 class TestGenerationService {
